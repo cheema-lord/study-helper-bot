@@ -2,95 +2,76 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Study Helper Bot - College Project</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Study Helper Bot</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-body{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:15px}
-.header{text-align:center;color:white;margin:15px 0}
-.chat-container{width:100%;max-width:420px;background:white;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,0.2);display:flex;flex-direction:column;height:70vh;overflow:hidden}
-.chat-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px;background:#f8f9ff}
-.msg{max-width:85%;padding:12px 15px;border-radius:18px;font-size:14px;line-height:1.5}
-.msg.bot{align-self:flex-start;background:#eef2ff;color:#333;border-bottom-left-radius:4px}
-.msg.user{align-self:flex-end;background:#4F46E5;color:white;border-bottom-right-radius:4px}
-.quick-btns{display:flex;gap:8px;padding:10px 15px;background:#f8f9ff;flex-wrap:wrap;border-top:1px solid #eee}
-.q-btn{background:white;border:1px solid #4F46E5;color:#4F46E5;padding:6px 12px;border-radius:20px;font-size:12px;cursor:pointer}
-.input-area{display:flex;padding:15px;gap:10px;background:white;border-top:1px solid #eee}
-.input-area input{flex:1;padding:12px 15px;border:2px solid #e5e7eb;border-radius:25px;outline:none}
-.input-area button{background:#4F46E5;color:white;border:none;width:45px;height:45px;border-radius:50%;cursor:pointer;font-size:18px}
-.footer{color:white;text-align:center;margin-top:15px;font-size:12px;opacity:0.8}
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:15px}
+.header{color:white;text-align:center;margin:15px 0}
+.chat-container{width:100%;max-width:420px;background:white;border-radius:20px;display:flex;flex-direction:column;height:75vh;overflow:hidden}
+.chat-messages{flex:1;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:10px;background:#faf9ff}
+.msg{max-width:85%;padding:10px 14px;border-radius:15px;font-size:14px;white-space:pre-wrap}
+.msg.bot{align-self:flex-start;background:#eef2ff}
+.msg.user{align-self:flex-end;background:#4f46e5;color:white}
+.q-btns{display:flex;flex-wrap:wrap;gap:6px;padding:10px;border-top:1px solid #eee}
+.q-btns button{border:1px solid #4f46e5;color:#4f46e5;background:white;padding:5px 10px;border-radius:20px;font-size:11px;cursor:pointer}
+.input-area{display:flex;gap:8px;padding:10px;border-top:1px solid #eee}
+.input-area input{flex:1;padding:10px;border:2px solid #eee;border-radius:20px;outline:none}
+.input-area button{background:#4f46e5;color:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer}
+.footer{color:white;font-size:11px;margin-top:10px;opacity:.8}
 </style>
 </head>
 <body>
-<div class="header">
-<h1>📚 Study Helper Bot</h1>
-<p>Math Solver + Roman Urdu Explanation</p>
-</div>
+<div class="header"><h1>📚 Study Helper Bot</h1><p>12th Class - Math + Computer</p></div>
 <div class="chat-container">
-<div class="chat-messages" id="chat">
-<div class="msg bot">Assalam-o-Alaikum! Main aap ka study helper hoon 🙏<br><br>1. Math problems step-by-step solve karna<br>2. Kisi bhi topic ki definition Roman Urdu me<br><br>Koi sawal pooch kar dekho!</div>
+<div class="chat-messages" id="chat"><div class="msg bot">السلام علیکم! 🙏
+میں آپ کا سٹڈی ہیلپر ہوں۔
+میتھ اور کمپیوٹر کا کوئی بھی سوال پوچھیں۔</div></div>
+<div class="q-btns">
+<button onclick="quick('2x+5=15')">2x+5=15</button>
+<button onclick="quick('Binary kya hai?')">Binary</button>
+<button onclick="quick('OS kya hai?')">OS</button>
+<button onclick="quick('Algorithm kya hai?')">Algorithm</button>
+<button onclick="quick('Algebra kya hai?')">Algebra</button>
+<button onclick="quick('RAM kya hai?')">RAM</button>
 </div>
-<div class="quick-btns">
-<button class="q-btn" onclick="sendQuick('2x + 5 = 15 solve karo')">Math: 2x+5=15</button>
-<button class="q-btn" onclick="sendQuick('Algebra kya hai?')">Algebra</button>
-<button class="q-btn" onclick="sendQuick('Photosynthesis kya hai?')">Photosynthesis</button>
+<div class="input-area"><input id="userInput" placeholder="سوال لکھیں..." onkeypress="if(event.key==='Enter')send()"><button onclick="send()">➤</button></div>
 </div>
-<div class="input-area">
-<input type="text" id="userInput" placeholder="Sawal likhen..." onkeypress="if(event.key==='Enter')sendMsg()">
-<button onclick="sendMsg()">➤</button>
-</div>
-</div>
-<div class="footer">Created by cheema-lord | BS CS Project</div>
+<div class="footer">Created by cheema-lord | Gujranwala</div>
 <script>
-const chat=document.getElementById('chat');const input=document.getElementById('userInput');
-function addMsg(text,who){const d=document.createElement('div');d.className='msg '+who;d.innerHTML=text;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
-function sendQuick(t){input.value=t;sendMsg();}
-function solveMath(q){try{let clean=q.toLowerCase().replace(/solve karo|solve|karo/g,'').trim();if(clean.includes('=')){let parts=clean.split('=');let left=parts[0].trim();let right=parseFloat(parts[1]);let m=left.match(/([+-]?\s*\d*)x/);let a=1;if(m){let coeff=m[1].replace(/\s/g,'');if(coeff==''||coeff=='+')a=1;else if(coeff=='-')a=-1;else a=parseFloat(coeff);let rest=left.replace(m[0],'').trim();let b=0;if(rest){b=eval(rest)||0;}let x=(right-b)/a;return <b>Math Solution:</b><br>${left} = ${right}<br><br><b>Step 1:</b> ${a}x = ${right} - (${b})<br><b>Step 2:</b> ${a}x = ${right-b}<br><b>Step 3:</b> x = ${right-b} / ${a}<br><br><b>Answer: x = ${x}</b> ✅<br><br><i>Roman Urdu: x ko akela karne ke liye ${b} ko dosri taraf bheja, phir ${a} se divide kiya.</i>;}}if(/^[0-9+\-*/().\s]+$/.test(clean)&&clean.length<20){return <b>Answer:</b> ${clean} = <b>${eval(clean)}</b> ✅;}}catch(e){}return null;}
-function getDefinition(q){q=q.toLowerCase();if(q.includes('algebra')){return <b>Algebra kya hai?</b><br>Maths ki shaakh jisme numbers ki jagah letters (x,y) use hote hain.<br><br><b>Misaal:</b> 2x+3=7 me x nikalna algebra hai.<br><i>Asaan me: Namaloom ko maloom karna!</i>;}if(q.includes('photo')){return <b>Photosynthesis kya hai?</b><br>Pode suraj ki roshni se khana banate hain.<br><b>Formula:</b> CO2 + Water + Sunlight = Glucose + Oxygen<br><i>Jaise hum khana pakate hain, waise pode dhoop me khana banate hain 🌱</i>;}return <b>Aap ne poocha:</b> "${q}"<br><br>Iska simple matlab:<br>→ Basic parts se samjho, misaal se jodo.<br><br><b>Roman Urdu Tip:</b> Mushkil lafz ko tod kar samjho.<br><br>Chapter naam batao to detail se samjha dunga!;}
-function sendMsg(){let t=input.value.trim();if(!t)return;addMsg(t,'user');input.value='';setTimeout(()=>{let mathAns=solveMath(t);if(mathAns){addMsg(mathAns,'bot');return;}let def=getDefinition(t);addMsg(def,'bot');},600);}
-</script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Study Helper Bot - 12th Class Project</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-body{background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:15px}
-.header{text-align:center;color:white;margin:15px 0}
-.chat-container{width:100%;max-width:420px;background:white;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,0.2);display:flex;flex-direction:column;height:70vh;overflow:hidden}
-.chat-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px;background:#faf9ff}
-.msg{max-width:85%;padding:12px 15px;border-radius:15px;font-size:14px;line-height:1.5;white-space:pre-wrap}
-.msg.bot{align-self:flex-start;background:#eef2ff;color:#333;border-bottom-left-radius:4px}
-.msg.user{align-self:flex-end;background:#4f46e5;color:white;border-bottom-right-radius:4px}
-.q-btns{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:white;border-top:1px solid #eee}
-.q-btns button{border:1px solid #4f46e5;color:#4f46e5;background:white;padding:6px 12px;border-radius:20px;font-size:12px;cursor:pointer}
-.input-area{display:flex;gap:8px;padding:12px;border-top:1px solid #eee;background:white}
-.input-area input{flex:1;padding:12px 15px;border:2px solid #e5e7eb;border-radius:25px;outline:none}
-.input-area button{background:#4f46e5;color:white;border:none;width:45px;height:45px;border-radius:50%;cursor:pointer;font-size:18px}
-.footer{color:white;text-align:center;margin-top:15px;font-size:12px;opacity:0.8}
-</style></head>
-<body>
-<div class="header"><h1>📚 Study Helper Bot</h1><p>Math Solver + Roman Urdu Explanation - 12th Class</p></div>
-<div class="chat-container">
-<div class="chat-messages" id="chat"><div class="msg bot">Assalam-o-Alaikum! Main aap ka study helper hoon 🙏<br><br>1. Math problems step-by-step solve karta hun<br>2. Kisi bhi topic ki definition Roman Urdu me deta hun<br><br>Sawal poocho!</div></div>
-<div class="q-btns"><button onclick="quick('Math: 2x+5=15 solve karo')">Math: 2x+5=15</button><button onclick="quick('What is Algebra?')">Algebra</button><button onclick="quick('Photosynthesis kya hai?')">Photosynthesis</button><button onclick="quick('2 ka 100 me se percent kitna?')">% wala sawal</button></div>
-<div class="input-area"><input id="userInput" placeholder="Yahan sawal likho..." onkeypress="if(event.key==='Enter')send()"><button onclick="send()">➤</button></div>
-</div>
-<div class="footer">Created by cheema-lord | 12th Class Project - Gujranwala</div>
-<script>
-const chat=document.getElementById('chat');const inp=document.getElementById('userInput');
-function add(t,c){let d=document.createElement('div');d.className='msg '+c;d.innerText=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
+const chat=document.getElementById('chat');
+const inp=document.getElementById('userInput');
+function add(t,c){
+let d=document.createElement('div');
+d.className='msg '+c;
+d.innerText=t;
+chat.appendChild(d);
+chat.scrollTop=chat.scrollHeight;
+}
 function quick(t){inp.value=t;send();}
 function answer(q){
 let l=q.toLowerCase();
-if(l.includes('2x+5=15'))return"Sawal: 2x+5=15\nStep 1: 2x = 15-5\nStep 2: 2x = 10\nStep 3: x = 10/2 = 5\nFinal Answer: x = 5";
-if(l.includes('2%100')||l.includes('2 % 100')||l.includes('percent'))return"2% of 100 ka matlab:\nFormula: (2/100) * 100 = 2\nJawab: 2\nRoman Urdu: Agar 100 me se 2 percent nikalo to 2 banta hai.";
-if(l.includes('photosynthesis'))return"Photosynthesis kya hai?\nPoday suraj ki roshni se apna khana banate hain.\nFormula: CO2 + Pani + Sunlight = Glucose + Oxygen\nRoman Urdu me: Poda hawa se CO2 leta hai, zameen se pani, aur roshni se khana banata hai.";
-if(l.includes('algebra'))return"Algebra kya hai?\nMath ki wo shaakh jisme hum unknown numbers ko x, y se zahir karte hain.\nJaise: x+5=10 me x ki value nikalna algebra hai.";
-try{let e=q.replace(/x/gi,'*').replace(/÷/g,'/');let r=eval(e);if(typeof r==='number'&&!isNaN(r))return q+" = "+r+"\nYe calculation ka jawab hai.";}catch(err){}
-return"Aap ne poocha: '"+q+"'\n\nIska jawab: Ye topic 12th class ke hisab se important hai. Roman Urdu me: "+q+" ka matlab hai iski detail se samajhna.\n\nKoi Math sawal hai to jaise '12*5' ya '100/4' likho, main foran solve kar dunga!";
+if(l.includes('2x+5=15')) return "سوال: 2x+5=15\nStep 1: 2x = 15-5\nStep 2: 2x = 10\nStep 3: x = 5\nFinal Answer: x=5";
+if(l.includes('binary')) return "Binary کیا ہے؟\nکمپیوٹر صرف 0 اور 1 سمجھتا ہے، اسی کو Binary کہتے ہیں۔\nمثال: 5 کا Binary 101 ہوتا ہے۔";
+if(l.includes('os')) return "OS کیا ہے؟\nOS وہ سافٹ ویئر ہے جو کمپیوٹر کو چلاتا ہے۔\nجیسے Windows, Android۔";
+if(l.includes('algo')) return "Algorithm کیا ہے؟\nکسی کام کو کرنے کا سٹیپ بائی سٹیپ طریقہ۔\nجیسے چائے بنانے کے سٹیپس۔";
+if(l.includes('algebra')) return "Algebra کیا ہے؟\nمیتھ کی وہ شاخ جس میں x, y سے نامعلوم قیمت نکالتے ہیں۔";
+if(l.includes('ram')) return "RAM کیا ہے؟\nیہ عارضی میموری ہے، کمپیوٹر بند ہوتے ہی ڈیٹا ختم۔";
+if(l.includes('rom')) return "ROM کیا ہے؟\nیہ مستقل میموری ہے، اس کا ڈیٹا ڈیلیٹ نہیں ہوتا۔";
+if(l.includes('%')) return "فیصد فارمولا: (حصہ / کل) * 100\nمثال: 100 کا 2% = 2";
+try{
+let r=eval(q.replace(/x/gi,'*'));
+if(!isNaN(r)) return q+" = "+r;
+}catch(e){}
+return "آپ نے پوچھا: "+q+"\nرومن اردو: یہ 12th کلاس کا اہم ٹاپک ہے۔";
 }
-function send(){let t=inp.value.trim();if(!t)return;add(t,'user');inp.value='';setTimeout(()=>{add(answer(t),'bot');},400);}
+function send(){
+let t=inp.value.trim();
+if(!t) return;
+add(t,'user');
+inp.value='';
+setTimeout(()=>{add(answer(t),'bot');},400);
+}
 </script>
 </body>
 </html>

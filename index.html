@@ -1,4 +1,307 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Study Helper Bot - Roman Urdu</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}body{background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:15px}.header{color:white;text-align:center;margin:15px 0}.chat-container{width:100%;max-width:420px;background:white;border-radius:20px;display:flex;flex-direction:column;height:75vh;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.2)}.chat-messages{flex:1;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:10px;background:#faf9ff}.msg{max-width:85%;padding:10px 14px;border-radius:15px;font-size:14px;white-space:pre-wrap;line-height:1.4}.msg.bot{align-self:flex-start;background:#eef2ff;color:#222}.msg.user{align-self:flex-end;background:#4f46e5;color:white}.q-btns{display:flex;flex-wrap:wrap;gap:6px;padding:10px;border-top:1px solid #eee}.q-btns button{border:1px solid #4f46e5;color:#4f46e5;background:white;padding:5px 10px;border-radius:20px;font-size:11px;cursor:pointer}.input-area{display:flex;gap:8px;padding:10px;border-top:1px solid #eee}.input-area input{flex:1;padding:10px;border:2px solid #eee;border-radius:20px;outline:none}.input-area button{background:#4f46e5;color:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer}.footer{color:white;font-size:11px;margin-top:10px;opacity:.8}</style></head><body><div class="header"><h1>📚 Study Helper Bot</h1><p>12th Class - Roman Urdu</p></div><div class="chat-container"><div class="chat-messages" id="chat"><div class="msg bot">Assalam-o-Alaikum! 🙏
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Study Helper Bot - Roman Urdu</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:15px;
+}
+
+.header{
+    color:white;
+    text-align:center;
+    margin:15px 0;
+}
+
+.chat-container{
+    width:100%;
+    max-width:420px;
+    background:white;
+    border-radius:20px;
+    display:flex;
+    flex-direction:column;
+    height:75vh;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.chat-messages{
+    flex:1;
+    overflow-y:auto;
+    padding:15px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    background:#faf9ff;
+}
+
+.msg{
+    max-width:85%;
+    padding:10px 14px;
+    border-radius:15px;
+    font-size:14px;
+    white-space:pre-wrap;
+    line-height:1.5;
+}
+
+.msg.bot{
+    align-self:flex-start;
+    background:#eef2ff;
+    color:#222;
+}
+
+.msg.user{
+    align-self:flex-end;
+    background:#4f46e5;
+    color:white;
+}
+
+.q-btns{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    padding:10px;
+    border-top:1px solid #eee;
+}
+
+.q-btns button{
+    border:1px solid #4f46e5;
+    color:#4f46e5;
+    background:white;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:11px;
+    cursor:pointer;
+}
+
+.input-area{
+    display:flex;
+    gap:8px;
+    padding:10px;
+    border-top:1px solid #eee;
+}
+
+.input-area input{
+    flex:1;
+    padding:10px;
+    border:2px solid #eee;
+    border-radius:20px;
+    outline:none;
+}
+
+.input-area button{
+    background:#4f46e5;
+    color:white;
+    border:none;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+.footer{
+    color:white;
+    font-size:11px;
+    margin-top:10px;
+    opacity:.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>📚 Study Helper Bot</h1>
+    <p>12th Class - Roman Urdu</p>
+</div>
+
+<div class="chat-container">
+
+<div class="chat-messages" id="chat">
+
+<div class="msg bot">
+Assalam-o-Alaikum! 🙏
+
 Main aap ka Study Helper hun.
 
-Math + Computer ka koi bhi sawal poocho, main Roman Urdu me jawab dunga.</div></div><div class="q-btns"><button onclick="quick('2x+5=15')">2x+5=15</button><button onclick="quick('Binary kya hai?')">Binary</button><button onclick="quick('OS kya hai?')">OS</button><button onclick="quick('Algorithm kya hai?')">Algorithm</button><button onclick="quick('Algebra kya hai?')">Algebra</button><button onclick="quick('RAM kya hai?')">RAM</button></div><div class="input-area"><input id="userInput" placeholder="Sawal likho..." onkeypress="if(event.key==='Enter')send()"><button onclick="send()">➤</button></div></div><div class="footer">Created by cheema-lord | Gujranwala</div><script>const chat=document.getElementById('chat');const inp=document.getElementById('userInput');function add(t,c){let d=document.createElement('div');d.className='msg '+c;d.innerText=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight}function quick(t){inp.value=t;send()}function answer(q){let l=q.toLowerCase();if(l.includes('2x+5=15')||l.includes('2x+5'))return"Sawal: 2x+5=15\nStep 1: 2x = 15 - 5\nStep 2: 2x = 10\nStep 3: x = 10 / 2\nFinal Answer: x = 5";if(l.includes('binary'))return"Binary kya hai?\nComputer sirf 0 aur 1 ki zaban samajhta hai, is ko Binary kehte hain.\nExample: 5 ka Binary 101 hota hai.\nRoman Urdu me: Ye computer ki bunyadi zaban hai.";if(l.includes('os')||l.includes('operating'))return"OS kya hai?\nOS ka matlab Operating System hai.\nYe wo software hai jo computer ko chalata hai.\nJaise: Windows, Android, iOS.\nKaam: Hardware aur Software ko aapas me jorta hai.";if(l.includes('algo'))return"Algorithm kya hai?\nKisi kaam ko karne ka step-by-step tareeka ko Algorithm kehte hain.\nExample: Chai banane ka Algorithm:\n1. Pani garam karo\n2. Patti dalo\n3. Doodh aur cheeni dalo";if(l.includes('ram'))return"RAM kya hai?\nRAM ka matlab Random Access Memory.\nYe computer ki short-term memory hai.\nJab computer ON hota hai to RAM kaam karti hai, OFF hote hi data khatam.";if(l.includes('rom'))return"ROM kya hai?\nROM ka matlab Read Only Memory.\nYe computer ki permanent memory hai.\nIs ka data delete nahi hota, company is me system data rakhti hai.";if(l.includes('algebra'))return"Algebra kya hai?\nMath ki wo shak hai jisme hum unknown number ko x, y se zahir karte hain.\nExample: x + 5 = 10 me x ki value nikalna Algebra hai.";if(l.includes('percent')||l.includes('%'))return"Percent ka formula:\nFormula: (Hissa / Kul) * 100\nExample: 100 ka 2% = (2/100)100 = 2";try{let r=eval(q.replace(/x/gi,'').replace(/÷/g,'/'));if(!isNaN(r))return q+" = "+r+"\nYe aap ke sawal ka hisabi jawab hai."}catch(e){}return"Sawal: "+q+"\nJawab Roman Urdu me:\nYe 12th class ka important topic hai. Is ka basic concept ye hai ke ye computer/math ka bunyadi hissa hai. Is ko step-by-step samajhna zaroori hai."}function send(){let t=inp.value.trim();if(!t)return;add(t,'user');inp.value='';setTimeout(()=>add(answer(t),'bot'),300)}</script></body></html>
+Math + Computer ke easy aur hard sawal poocho.
+Main har jawab Roman Urdu mein,
+step-by-step aur simple tareeqe se samjhaunga.
+</div>
+
+</div>
+
+<div class="q-btns">
+
+<button onclick="quick('2x+5=15')">
+2x+5=15
+</button>
+
+<button onclick="quick('Binary kya hai?')">
+Binary
+</button>
+
+<button onclick="quick('Operating System kya hai?')">
+OS
+</button>
+
+<button onclick="quick('Algorithm kya hai?')">
+Algorithm
+</button>
+
+<button onclick="quick('Algebra kya hai?')">
+Algebra
+</button>
+
+<button onclick="quick('RAM kya hai?')">
+RAM
+</button>
+
+</div>
+
+<div class="input-area">
+
+<input
+id="userInput"
+placeholder="Sawal likho..."
+onkeypress="if(event.key==='Enter')send()">
+
+<button onclick="send()">➤</button>
+
+</div>
+
+</div>
+
+<div class="footer">
+Created by cheema-lord | Gujranwala
+</div>
+
+
+<script>
+
+const chat = document.getElementById("chat");
+const inp = document.getElementById("userInput");
+
+
+function add(text, type){
+
+    let div = document.createElement("div");
+
+    div.className = "msg " + type;
+
+    div.innerText = text;
+
+    chat.appendChild(div);
+
+    chat.scrollTop = chat.scrollHeight;
+}
+
+
+function quick(text){
+
+    inp.value = text;
+
+    send();
+}
+
+
+/* =========================
+   MAIN ANSWER SYSTEM
+========================= */
+
+function answer(q){
+
+    let l = q.toLowerCase().trim();
+
+
+    /* =========================
+       MATH
+    ========================= */
+
+    if(l.includes("2x+5=15") || l.includes("2x+5")){
+
+        return `
+Sawal: 2x + 5 = 15
+
+Step 1:
+Sab se pehle +5 ko doosri side le jao.
+
+2x = 15 - 5
+
+Step 2:
+2x = 10
+
+Step 3:
+Ab dono sides ko 2 se divide karo.
+
+x = 10 ÷ 2
+
+Final Answer:
+
+x = 5
+
+Easy samajh:
+x ki value 5 hai kyun ke
+2 × 5 + 5 = 15.
+`;
+    }
+
+
+    /* =========================
+       BINARY
+    ========================= */
+
+    if(l.includes("binary")){
+
+        return `
+Binary kya hai?
+
+Binary computer ki basic language hai.
+
+Is mein sirf 2 digits hoti hain:
+
+0 aur 1
+
+Computer inhi 0 aur 1 ko samajh kar information process karta hai.
+
+Example:
+
+Decimal 5 = Binary 101
+
+Easy yaad rakho:
+
+Binary = 0 aur 1 ki language.
+`;
+    }
+
+
+    /* =========================
+       OPERATING SYSTEM
+    ========================= */
+
+    if(
+        l.includes("os") ||
+        l.includes("operating system")
+    ){
+
+        return `
+Operating System kya hai?
+
+OS k
+```

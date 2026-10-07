@@ -1,143 +1,1058 @@
-You are an intelligent 12th-class Study Helper.
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-Your job is NOT to give only a short predefined answer.
+<title>Smart Study Helper - Roman Urdu</title>
 
-Whenever a student asks a question, first understand what the student is actually asking. Then create the answer yourself using your knowledge.
+<style>
 
-IMPORTANT LANGUAGE RULE:
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
 
-* Always answer in easy Roman Urdu.
-* The student may ask the question in English, Urdu, Hindi, or Roman Urdu.
-* No matter which language the student uses, answer in easy Roman Urdu.
-* Keep important English technical terms in English, such as Algorithm, Operating System, RAM, CPU, Binary, Variable, Formula, etc.
-* Explain difficult English terms in simple Roman Urdu.
+body{
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:15px;
+}
 
-ANSWER STYLE:
+.header{
+    color:white;
+    text-align:center;
+    margin:15px 0;
+}
 
-For a normal question, use this structure when appropriate:
+.header h1{
+    font-size:27px;
+}
 
-1. Direct Answer
-   Give the answer first in simple words.
+.header p{
+    margin-top:5px;
+}
 
-2. Simple Explanation
-   Explain what it means in easy Roman Urdu.
+.chat-container{
+    width:100%;
+    max-width:450px;
+    height:78vh;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 10px 35px rgba(0,0,0,.25);
+}
 
-3. Step-by-Step
-   If the question involves a process, calculation, programming, logic, or problem solving, explain every step.
+.chat-messages{
+    flex:1;
+    overflow-y:auto;
+    padding:15px;
+    background:#faf9ff;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
 
-4. Example
-   Give a simple real-life or academic example so the student can understand the concept.
+.msg{
+    max-width:88%;
+    padding:12px 15px;
+    border-radius:16px;
+    font-size:14px;
+    line-height:1.55;
+    white-space:pre-wrap;
+}
 
-5. Important Points
-   Mention the important facts the student should remember.
+.msg.bot{
+    align-self:flex-start;
+    background:#eef2ff;
+    color:#222;
+}
 
-6. Related Knowledge
-   Think about what other information is directly connected to the question and explain the most useful related concepts.
+.msg.user{
+    align-self:flex-end;
+    background:#4f46e5;
+    color:white;
+}
 
-7. Exam Point
-   If useful for a 12th-class student, give a short exam-ready definition or answer.
+.q-btns{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    padding:10px;
+    border-top:1px solid #eee;
+}
 
-IMPORTANT:
-Do NOT force every answer into all 7 sections.
-Use only the sections that actually help the student.
+.q-btns button{
+    background:white;
+    color:#4f46e5;
+    border:1px solid #4f46e5;
+    border-radius:20px;
+    padding:7px 11px;
+    cursor:pointer;
+    font-size:11px;
+}
 
-DIFFICULT QUESTIONS:
+.q-btns button:hover{
+    background:#4f46e5;
+    color:white;
+}
 
-If the question is difficult, confusing, theoretical, analytical, mathematical, or has multiple parts:
+.input-area{
+    display:flex;
+    gap:8px;
+    padding:10px;
+    border-top:1px solid #eee;
+}
 
-* Break the question into small parts.
-* First explain what the question is asking.
-* Then identify the concept needed.
-* Then solve/explain it step-by-step.
-* Do not skip important reasoning.
-* Use simple examples.
-* If there are multiple possible interpretations, explain them clearly.
-* At the end, give the final answer separately.
+.input-area input{
+    flex:1;
+    padding:12px 15px;
+    border:2px solid #eee;
+    border-radius:25px;
+    outline:none;
+    font-size:14px;
+}
 
-If the student asks:
-"Why?"
-"How?"
-"Explain this."
-"What does this mean?"
-"Is this correct?"
-"Give me more detail."
+.input-area input:focus{
+    border-color:#4f46e5;
+}
 
-Then expand the explanation instead of repeating the same short definition.
+.input-area button{
+    width:44px;
+    height:44px;
+    border:none;
+    border-radius:50%;
+    background:#4f46e5;
+    color:white;
+    cursor:pointer;
+    font-size:18px;
+}
 
-MATH QUESTIONS:
+.footer{
+    color:white;
+    font-size:11px;
+    margin-top:10px;
+    opacity:.8;
+}
 
-For Math:
+.typing{
+    font-style:italic;
+    opacity:.7;
+}
 
-* Identify the given information.
-* Identify what needs to be found.
-* Write the relevant formula.
-* Put the values into the formula.
-* Calculate step-by-step.
-* Show the final answer.
-* Verify the answer when possible.
-* Explain WHY each step is being performed.
+</style>
+</head>
 
-Do not only give the final numerical answer.
 
-COMPUTER SCIENCE QUESTIONS:
+<body>
 
-For Computer Science:
+<div class="header">
 
-* Give the definition.
-* Explain the concept in simple Roman Urdu.
-* Explain how it works.
-* Give a practical example.
-* Explain related concepts when useful.
-* Mention advantages/disadvantages or types if relevant.
-* Give an exam-ready answer when appropriate.
+<h1>📚 Smart Study Helper</h1>
 
-ANALYTICAL / LOGIC QUESTIONS:
+<p>12th Class • Roman Urdu • Smart Explanation</p>
 
-For analytical questions:
+</div>
 
-* First explain the rules or conditions.
-* Break the paragraph into individual facts.
-* Show what is possible and what is impossible.
-* Eliminate incorrect options logically.
-* Explain WHY the correct option is correct.
-* If multiple-choice, discuss the options when useful.
 
-UNKNOWN QUESTIONS:
+<div class="chat-container">
 
-If you do not know something with confidence:
 
-* Do not invent facts.
-* Clearly say that you are not completely sure.
-* Explain what you do know.
-* Ask for the exact question/context if needed.
+<div class="chat-messages" id="chat">
 
-STUDENT LEVEL:
+<div class="msg bot">
 
-Assume the student understands basic school concepts but may have difficulty with complicated English or advanced explanations.
+Assalam-o-Alaikum! 🙏
 
-Teach like a patient teacher.
+Main aap ka Smart Study Helper hun.
 
-Do not make the student feel stupid for asking a basic question.
+Aap Math, Computer Science, Algebra,
+Binary, Programming, Algorithms ya
+kisi bhi study topic ka sawal pooch sakte ho.
 
-Use simple wording such as:
+Main:
 
-"Simple words mein..."
-"Is ka matlab ye hai..."
-"Easy example..."
-"Step 1..."
-"Step 2..."
-"Exam mein aise likh sakte ho..."
+• Question ko samjhunga
+• Important concept identify karunga
+• Step-by-step explain karunga
+• Easy example dunga
+• Related knowledge bataunga
+• Aur akhir mein exam point dunga
 
-FINAL GOAL:
+Sawal pooch kar start karo. 📚
 
-The student should not only know the answer.
+</div>
 
-The student should understand:
+</div>
 
-* WHAT the answer is
-* WHY it is the answer
-* HOW it works
-* WHERE it is used
-* HOW to answer a similar question in the exam
 
-Always prioritize understanding over memorization.
+<div class="q-btns">
+
+<button onclick="quick('2x + 5 = 15')">
+Math
+</button>
+
+<button onclick="quick('Binary kya hai?')">
+Binary
+</button>
+
+<button onclick="quick('Operating System kya hai?')">
+OS
+</button>
+
+<button onclick="quick('Algorithm kya hai?')">
+Algorithm
+</button>
+
+<button onclick="quick('RAM kya hai?')">
+RAM
+</button>
+
+<button onclick="quick('Algebra kya hai?')">
+Algebra
+</button>
+
+</div>
+
+
+<div class="input-area">
+
+<input
+id="userInput"
+placeholder="Apna sawal likho..."
+autocomplete="off"
+>
+
+<button onclick="send()">➤</button>
+
+</div>
+
+</div>
+
+
+<div class="footer">
+
+Created by cheema-lord | Gujranwala
+
+</div>
+
+
+<script>
+
+
+const chat = document.getElementById("chat");
+const input = document.getElementById("userInput");
+
+
+/* ============================
+   MESSAGE SYSTEM
+============================ */
+
+function addMessage(text,type){
+
+    const div = document.createElement("div");
+
+    div.className = "msg " + type;
+
+    div.innerText = text;
+
+    chat.appendChild(div);
+
+    chat.scrollTop = chat.scrollHeight;
+}
+
+
+/* ============================
+   QUICK BUTTON
+============================ */
+
+function quick(question){
+
+    input.value = question;
+
+    send();
+
+}
+
+
+/* ============================
+   QUESTION ANALYZER
+============================ */
+
+function analyzeQuestion(question){
+
+    const q = question.toLowerCase();
+
+    let topic = "general";
+
+    if(
+        q.includes("binary") ||
+        q.includes("decimal") ||
+        q.includes("number system")
+    ){
+        topic = "binary";
+    }
+
+    else if(
+        q.includes("ram") ||
+        q.includes("memory")
+    ){
+        topic = "ram";
+    }
+
+    else if(
+        q.includes("rom")
+    ){
+        topic = "rom";
+    }
+
+    else if(
+        q.includes("operating system") ||
+        q.includes("os kya") ||
+        q === "os"
+    ){
+        topic = "os";
+    }
+
+    else if(
+        q.includes("algorithm") ||
+        q.includes("algo")
+    ){
+        topic = "algorithm";
+    }
+
+    else if(
+        q.includes("algebra") ||
+        q.includes("equation") ||
+        q.includes("solve")
+    ){
+        topic = "algebra";
+    }
+
+    else if(
+        q.includes("percentage") ||
+        q.includes("percent") ||
+        q.includes("%")
+    ){
+        topic = "percentage";
+    }
+
+    else if(
+        q.includes("cpu") ||
+        q.includes("processor")
+    ){
+        topic = "cpu";
+    }
+
+    else if(
+        q.includes("computer")
+    ){
+        topic = "computer";
+    }
+
+    else if(
+        q.includes("programming") ||
+        q.includes("code") ||
+        q.includes("javascript") ||
+        q.includes("python")
+    ){
+        topic = "programming";
+    }
+
+    return topic;
+}
+
+
+/* ============================
+   SMART ANSWER
+============================ */
+
+function answer(question){
+
+    const topic = analyzeQuestion(question);
+
+
+    /* ========================
+       ALGEBRA
+    ======================== */
+
+    if(topic === "algebra"){
+
+        return `
+Sawal:
+${question}
+
+🔹 Basic Concept
+
+Algebra Mathematics ka wo part hai
+jahan unknown value ko letters se represent
+kiya jata hai.
+
+Example:
+
+x + 5 = 10
+
+Yahan x unknown number hai.
+
+🔹 Step 1
+
+x + 5 = 10
+
++5 ko doosri side le jayenge:
+
+x = 10 - 5
+
+🔹 Step 2
+
+x = 5
+
+✅ Final Answer:
+
+x = 5
+
+🔹 Easy Samajh
+
+Algebra mein hum unknown value ko
+find karte hain.
+
+🔹 Exam Point
+
+Algebra is a branch of mathematics
+that uses symbols and letters to represent
+unknown quantities.
+`;
+    }
+
+
+    /* ========================
+       BINARY
+    ======================== */
+
+    if(topic === "binary"){
+
+        return `
+Sawal:
+${question}
+
+🔹 Binary kya hai?
+
+Binary computer ki basic number system hai.
+
+Is mein sirf do digits hoti hain:
+
+0 aur 1
+
+Computer information ko internally
+0 aur 1 ki form mein process karta hai.
+
+🔹 Example
+
+Decimal 5:
+
+5 = 101 Binary
+
+Decimal 10:
+
+10 = 1010 Binary
+
+🔹 Easy Example
+
+Switch ko imagine karo:
+
+OFF = 0
+ON = 1
+
+Isi tarah computer binary values
+use karta hai.
+
+🔹 Important Point
+
+Binary = Base 2 Number System
+
+Is ke digits:
+
+0 aur 1
+
+🔹 Exam Point
+
+Binary is a base-2 number system
+that uses only 0 and 1.
+`;
+    }
+
+
+    /* ========================
+       OPERATING SYSTEM
+    ======================== */
+
+    if(topic === "os"){
+
+        return `
+Sawal:
+${question}
+
+🔹 Operating System kya hai?
+
+Operating System yani OS ek important
+system software hai jo computer ke
+hardware aur software ko manage karta hai.
+
+🔹 Simple Example
+
+Windows ek Operating System hai.
+
+Android bhi Operating System hai.
+
+Linux bhi Operating System hai.
+
+🔹 OS ke main kaam
+
+1. Hardware ko manage karna
+2. Applications ko run karna
+3. Files ko manage karna
+4. Memory manage karna
+5. User ko interface dena
+
+🔹 Real Life Example
+
+Computer ko ek school samjho.
+
+Hardware = School ki buildings aur rooms
+
+Applications = Students ke different kaam
+
+OS = Principal/Manager
+
+OS sab cheezon ko coordinate karta hai.
+
+🔹 Exam Point
+
+Operating System is system software
+that manages computer hardware and
+software resources.
+`;
+    }
+
+
+    /* ========================
+       ALGORITHM
+    ======================== */
+
+    if(topic === "algorithm"){
+
+        return `
+Sawal:
+${question}
+
+🔹 Algorithm kya hai?
+
+Algorithm kisi problem ko solve karne
+ka step-by-step procedure hota hai.
+
+🔹 Simple Example
+
+Chai banane ka Algorithm:
+
+Step 1:
+Pani garam karo.
+
+Step 2:
+Chai patti dalo.
+
+Step 3:
+Doodh dalo.
+
+Step 4:
+Cheeni dalo.
+
+Step 5:
+Chai ubaalo.
+
+Step 6:
+Cup mein daal do.
+
+Yani kisi kaam ko ordered steps mein
+karna Algorithm kehlata hai.
+
+🔹 Important Features
+
+• Clear steps
+• Proper sequence
+• Problem solving
+• Finite steps
+
+🔹 Exam Point
+
+Algorithm is a step-by-step procedure
+used to solve a problem.
+`;
+    }
+
+
+    /* ========================
+       RAM
+    ======================== */
+
+    if(topic === "ram"){
+
+        return `
+Sawal:
+${question}
+
+🔹 RAM kya hai?
+
+RAM ka full form:
+
+Random Access Memory
+
+RAM computer ki temporary memory hoti hai.
+
+Jab computer koi program run karta hai,
+to us program ka working data RAM mein
+temporarily store hota hai.
+
+🔹 Example
+
+Aap Chrome open karte ho.
+
+Chrome ko kaam karne ke liye RAM
+use hoti hai.
+
+Agar multiple programs open hon,
+to zyada RAM ki zaroorat ho sakti hai.
+
+🔹 Important
+
+RAM = Temporary / Volatile Memory
+
+Computer OFF hone par RAM ka
+temporary data lose ho jata hai.
+
+🔹 RAM vs ROM
+
+RAM:
+Temporary
+
+ROM:
+Non-volatile / permanent type memory
+
+🔹 Exam Point
+
+RAM is a volatile memory used to
+temporarily store data and programs
+currently being used.
+`;
+    }
+
+
+    /* ========================
+       ROM
+    ======================== */
+
+    if(topic === "rom"){
+
+        return `
+Sawal:
+${question}
+
+🔹 ROM kya hai?
+
+ROM ka full form:
+
+Read Only Memory
+
+ROM non-volatile memory hoti hai.
+
+Is ka data power OFF hone ke baad
+normally retain rehta hai.
+
+🔹 RAM vs ROM
+
+RAM:
+Temporary
+
+ROM:
+Non-volatile
+
+RAM:
+Fast working memory
+
+ROM:
+Important fixed instructions/data ke
+liye use ho sakti hai.
+
+🔹 Exam Point
+
+ROM is a non-volatile memory that
+retains stored information even when
+power is turned off.
+`;
+    }
+
+
+    /* ========================
+       CPU
+    ======================== */
+
+    if(topic === "cpu"){
+
+        return `
+Sawal:
+${question}
+
+🔹 CPU kya hai?
+
+CPU ka full form:
+
+Central Processing Unit
+
+CPU ko computer ka "brain" kaha jata hai.
+
+Ye instructions ko process karta hai
+aur calculations perform karta hai.
+
+🔹 Main Components
+
+1. ALU
+Arithmetic aur logical operations.
+
+2. Control Unit
+Instructions ko control aur coordinate karti hai.
+
+3. Registers
+Small, fast storage locations.
+
+🔹 Simple Example
+
+Agar computer ek factory hai,
+to CPU us factory ka main worker/manager
+samjha ja sakta hai jo instructions
+process karta hai.
+
+🔹 Exam Point
+
+CPU is the main processing unit of
+a computer that executes instructions.
+`;
+    }
+
+
+    /* ========================
+       PERCENTAGE
+    ======================== */
+
+    if(topic === "percentage"){
+
+        return `
+Sawal:
+${question}
+
+🔹 Percentage kya hoti hai?
+
+Percentage ka matlab hota hai:
+
+"Har 100 mein se kitna"
+
+Formula:
+
+Percentage =
+(Hissa ÷ Kul) × 100
+
+🔹 Example
+
+20 students 100 mein se pass hue.
+
+Percentage:
+
+20 ÷ 100 × 100
+
+= 20%
+
+✅ Answer:
+
+20%
+
+🔹 Easy Trick
+
+Percent ka matlab:
+
+Per = har
+
+Cent = 100
+
+Yani:
+
+Percent = Har 100 mein se.
+`;
+    }
+
+
+    /* ========================
+       PROGRAMMING
+    ======================== */
+
+    if(topic === "programming"){
+
+        return `
+Sawal:
+${question}
+
+🔹 Programming kya hai?
+
+Programming ka matlab computer ko
+instructions dena hota hai taake wo
+specific kaam perform kare.
+
+🔹 Example
+
+Agar hum computer ko kahen:
+
+"Do numbers ko add karo"
+
+to programming language mein
+hum us ka code likh sakte hain.
+
+🔹 Common Programming Languages
+
+• Python
+• JavaScript
+• Java
+• C++
+• C#
+
+🔹 Simple Concept
+
+Programmer:
+Instruction likhta hai.
+
+Computer:
+Instruction ko execute karta hai.
+
+🔹 Exam Point
+
+Programming is the process of writing
+instructions for a computer to perform
+a specific task.
+`;
+    }
+
+
+    /* ========================
+       COMPUTER
+    ======================== */
+
+    if(topic === "computer"){
+
+        return `
+Sawal:
+${question}
+
+🔹 Computer kya hai?
+
+Computer ek electronic device hai jo
+data ko input ke taur par leta hai,
+us ko process karta hai aur output deta hai.
+
+Basic cycle:
+
+Input → Processing → Output
+
+Example:
+
+Keyboard se number enter kiya.
+
+Input = Number
+
+CPU = Processing
+
+Screen par result = Output
+
+🔹 Computer ke main parts
+
+• CPU
+• RAM
+• Storage
+• Input devices
+• Output devices
+
+🔹 Easy Formula
+
+Input → Process → Output
+
+Ye computer ka basic working concept hai.
+`;
+    }
+
+
+    /* ========================
+       SIMPLE CALCULATOR
+    ======================== */
+
+    try{
+
+        let expression = question
+            .replace(/×/g,"*")
+            .replace(/÷/g,"/")
+            .replace(/,/g,"");
+
+        if(/^[0-9+\-*/().%\s]+$/.test(expression)){
+
+            let result = Function(
+                '"use strict"; return (' +
+                expression +
+                ')'
+            )();
+
+            if(Number.isFinite(result)){
+
+                return `
+🔢 Calculation
+
+Sawal:
+
+${question}
+
+Step 1:
+Expression ko identify karte hain.
+
+Step 2:
+Calculation perform karte hain.
+
+Step 3:
+Result check karte hain.
+
+✅ Final Answer:
+
+${result}
+`;
+            }
+        }
+
+    }catch(error){}
+
+
+    /* ========================
+       GENERAL SMART RESPONSE
+    ======================== */
+
+    return `
+Sawal:
+${question}
+
+🔍 Question Analysis
+
+Main is question ko concept ke
+hisaab se samajhne ki koshish karta hun.
+
+🔹 Basic Answer
+
+Is question ka exact answer dene ke liye
+question ke main concept ko identify karna
+zaroori hai.
+
+🔹 Isay kaise samjhein?
+
+Pehle ye dekhein ke question:
+
+• Definition pooch raha hai?
+• Calculation pooch raha hai?
+• Reason pooch raha hai?
+• Process pooch raha hai?
+• Comparison pooch raha hai?
+• Ya problem solve karne ko keh raha hai?
+
+🔹 Study Method
+
+Step 1:
+Question ko carefully read karo.
+
+Step 2:
+Important words identify karo.
+
+Step 3:
+Relevant concept/formula choose karo.
+
+Step 4:
+Problem ko small parts mein divide karo.
+
+Step 5:
+Har part ko solve karo.
+
+Step 6:
+Final answer verify karo.
+
+💡 Agar aap mujhe question ka complete
+text ya options bhej do, main us ko
+Roman Urdu mein step-by-step explain
+karunga aur related concepts bhi bataunga.
+
+📚 Goal:
+
+Sirf answer yaad nahi karna,
+balkay ye samajhna hai ke answer
+WHY aur HOW hai.
+`;
+}
+
+
+/* ============================
+   SEND
+============================ */
+
+function send(){
+
+    const text = input.value.trim();
+
+    if(!text) return;
+
+    addMessage(text,"user");
+
+    input.value = "";
+
+    const typing = document.createElement("div");
+
+    typing.className = "msg bot typing";
+
+    typing.innerText = "Soch raha hun... 🤔";
+
+    chat.appendChild(typing);
+
+    chat.scrollTop = chat.scrollHeight;
+
+
+    setTimeout(()=>{
+
+        typing.remove();
+
+        const response = answer(text);
+
+        addMessage(response,"bot");
+
+    },500);
+
+}
+
+
+/* ENTER KEY */
+
+input.addEventListener("keydown",function(event){
+
+    if(event.key === "Enter"){
+        send();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
+```

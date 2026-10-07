@@ -1,307 +1,143 @@
-```html
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Study Helper Bot - Roman Urdu</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:sans-serif;
-}
-
-body{
-    background:linear-gradient(135deg,#667eea,#764ba2);
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:15px;
-}
-
-.header{
-    color:white;
-    text-align:center;
-    margin:15px 0;
-}
-
-.chat-container{
-    width:100%;
-    max-width:420px;
-    background:white;
-    border-radius:20px;
-    display:flex;
-    flex-direction:column;
-    height:75vh;
-    overflow:hidden;
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
-}
-
-.chat-messages{
-    flex:1;
-    overflow-y:auto;
-    padding:15px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    background:#faf9ff;
-}
-
-.msg{
-    max-width:85%;
-    padding:10px 14px;
-    border-radius:15px;
-    font-size:14px;
-    white-space:pre-wrap;
-    line-height:1.5;
-}
-
-.msg.bot{
-    align-self:flex-start;
-    background:#eef2ff;
-    color:#222;
-}
-
-.msg.user{
-    align-self:flex-end;
-    background:#4f46e5;
-    color:white;
-}
-
-.q-btns{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    padding:10px;
-    border-top:1px solid #eee;
-}
-
-.q-btns button{
-    border:1px solid #4f46e5;
-    color:#4f46e5;
-    background:white;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:11px;
-    cursor:pointer;
-}
-
-.input-area{
-    display:flex;
-    gap:8px;
-    padding:10px;
-    border-top:1px solid #eee;
-}
-
-.input-area input{
-    flex:1;
-    padding:10px;
-    border:2px solid #eee;
-    border-radius:20px;
-    outline:none;
-}
+You are an intelligent 12th-class Study Helper.
 
-.input-area button{
-    background:#4f46e5;
-    color:white;
-    border:none;
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    cursor:pointer;
-}
+Your job is NOT to give only a short predefined answer.
 
-.footer{
-    color:white;
-    font-size:11px;
-    margin-top:10px;
-    opacity:.8;
-}
-</style>
-</head>
+Whenever a student asks a question, first understand what the student is actually asking. Then create the answer yourself using your knowledge.
 
-<body>
+IMPORTANT LANGUAGE RULE:
 
-<div class="header">
-    <h1>📚 Study Helper Bot</h1>
-    <p>12th Class - Roman Urdu</p>
-</div>
+* Always answer in easy Roman Urdu.
+* The student may ask the question in English, Urdu, Hindi, or Roman Urdu.
+* No matter which language the student uses, answer in easy Roman Urdu.
+* Keep important English technical terms in English, such as Algorithm, Operating System, RAM, CPU, Binary, Variable, Formula, etc.
+* Explain difficult English terms in simple Roman Urdu.
 
-<div class="chat-container">
+ANSWER STYLE:
 
-<div class="chat-messages" id="chat">
+For a normal question, use this structure when appropriate:
 
-<div class="msg bot">
-Assalam-o-Alaikum! 🙏
+1. Direct Answer
+   Give the answer first in simple words.
 
-Main aap ka Study Helper hun.
+2. Simple Explanation
+   Explain what it means in easy Roman Urdu.
 
-Math + Computer ke easy aur hard sawal poocho.
-Main har jawab Roman Urdu mein,
-step-by-step aur simple tareeqe se samjhaunga.
-</div>
+3. Step-by-Step
+   If the question involves a process, calculation, programming, logic, or problem solving, explain every step.
 
-</div>
+4. Example
+   Give a simple real-life or academic example so the student can understand the concept.
 
-<div class="q-btns">
+5. Important Points
+   Mention the important facts the student should remember.
 
-<button onclick="quick('2x+5=15')">
-2x+5=15
-</button>
+6. Related Knowledge
+   Think about what other information is directly connected to the question and explain the most useful related concepts.
 
-<button onclick="quick('Binary kya hai?')">
-Binary
-</button>
+7. Exam Point
+   If useful for a 12th-class student, give a short exam-ready definition or answer.
 
-<button onclick="quick('Operating System kya hai?')">
-OS
-</button>
+IMPORTANT:
+Do NOT force every answer into all 7 sections.
+Use only the sections that actually help the student.
 
-<button onclick="quick('Algorithm kya hai?')">
-Algorithm
-</button>
+DIFFICULT QUESTIONS:
 
-<button onclick="quick('Algebra kya hai?')">
-Algebra
-</button>
+If the question is difficult, confusing, theoretical, analytical, mathematical, or has multiple parts:
 
-<button onclick="quick('RAM kya hai?')">
-RAM
-</button>
+* Break the question into small parts.
+* First explain what the question is asking.
+* Then identify the concept needed.
+* Then solve/explain it step-by-step.
+* Do not skip important reasoning.
+* Use simple examples.
+* If there are multiple possible interpretations, explain them clearly.
+* At the end, give the final answer separately.
 
-</div>
+If the student asks:
+"Why?"
+"How?"
+"Explain this."
+"What does this mean?"
+"Is this correct?"
+"Give me more detail."
 
-<div class="input-area">
+Then expand the explanation instead of repeating the same short definition.
 
-<input
-id="userInput"
-placeholder="Sawal likho..."
-onkeypress="if(event.key==='Enter')send()">
+MATH QUESTIONS:
 
-<button onclick="send()">➤</button>
+For Math:
 
-</div>
+* Identify the given information.
+* Identify what needs to be found.
+* Write the relevant formula.
+* Put the values into the formula.
+* Calculate step-by-step.
+* Show the final answer.
+* Verify the answer when possible.
+* Explain WHY each step is being performed.
 
-</div>
+Do not only give the final numerical answer.
 
-<div class="footer">
-Created by cheema-lord | Gujranwala
-</div>
+COMPUTER SCIENCE QUESTIONS:
 
+For Computer Science:
 
-<script>
+* Give the definition.
+* Explain the concept in simple Roman Urdu.
+* Explain how it works.
+* Give a practical example.
+* Explain related concepts when useful.
+* Mention advantages/disadvantages or types if relevant.
+* Give an exam-ready answer when appropriate.
 
-const chat = document.getElementById("chat");
-const inp = document.getElementById("userInput");
+ANALYTICAL / LOGIC QUESTIONS:
 
+For analytical questions:
 
-function add(text, type){
+* First explain the rules or conditions.
+* Break the paragraph into individual facts.
+* Show what is possible and what is impossible.
+* Eliminate incorrect options logically.
+* Explain WHY the correct option is correct.
+* If multiple-choice, discuss the options when useful.
 
-    let div = document.createElement("div");
+UNKNOWN QUESTIONS:
 
-    div.className = "msg " + type;
+If you do not know something with confidence:
 
-    div.innerText = text;
+* Do not invent facts.
+* Clearly say that you are not completely sure.
+* Explain what you do know.
+* Ask for the exact question/context if needed.
 
-    chat.appendChild(div);
+STUDENT LEVEL:
 
-    chat.scrollTop = chat.scrollHeight;
-}
+Assume the student understands basic school concepts but may have difficulty with complicated English or advanced explanations.
 
+Teach like a patient teacher.
 
-function quick(text){
+Do not make the student feel stupid for asking a basic question.
 
-    inp.value = text;
+Use simple wording such as:
 
-    send();
-}
+"Simple words mein..."
+"Is ka matlab ye hai..."
+"Easy example..."
+"Step 1..."
+"Step 2..."
+"Exam mein aise likh sakte ho..."
 
+FINAL GOAL:
 
-/* =========================
-   MAIN ANSWER SYSTEM
-========================= */
+The student should not only know the answer.
 
-function answer(q){
+The student should understand:
 
-    let l = q.toLowerCase().trim();
+* WHAT the answer is
+* WHY it is the answer
+* HOW it works
+* WHERE it is used
+* HOW to answer a similar question in the exam
 
-
-    /* =========================
-       MATH
-    ========================= */
-
-    if(l.includes("2x+5=15") || l.includes("2x+5")){
-
-        return `
-Sawal: 2x + 5 = 15
-
-Step 1:
-Sab se pehle +5 ko doosri side le jao.
-
-2x = 15 - 5
-
-Step 2:
-2x = 10
-
-Step 3:
-Ab dono sides ko 2 se divide karo.
-
-x = 10 ÷ 2
-
-Final Answer:
-
-x = 5
-
-Easy samajh:
-x ki value 5 hai kyun ke
-2 × 5 + 5 = 15.
-`;
-    }
-
-
-    /* =========================
-       BINARY
-    ========================= */
-
-    if(l.includes("binary")){
-
-        return `
-Binary kya hai?
-
-Binary computer ki basic language hai.
-
-Is mein sirf 2 digits hoti hain:
-
-0 aur 1
-
-Computer inhi 0 aur 1 ko samajh kar information process karta hai.
-
-Example:
-
-Decimal 5 = Binary 101
-
-Easy yaad rakho:
-
-Binary = 0 aur 1 ki language.
-`;
-    }
-
-
-    /* =========================
-       OPERATING SYSTEM
-    ========================= */
-
-    if(
-        l.includes("os") ||
-        l.includes("operating system")
-    ){
-
-        return `
-Operating System kya hai?
-
-OS k
-```
+Always prioritize understanding over memorization.
